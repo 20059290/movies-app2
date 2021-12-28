@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import moviesRouter from './api/movies';
 import genresRouter from './api/genres';
+import topRatedRouter from './api/toprated';
 import './db';
 import './seedData';
 import usersRouter from './api/users';
@@ -36,6 +37,9 @@ app.use('/api/genres', genresRouter);
 app.use('/api/users', usersRouter);
 // Add passport.authenticate(..)  to middleware stack for protected routes​
 app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+
+app.use('/api/toprated', topRatedRouter);
+
 
 app.use(errHandler);
 
