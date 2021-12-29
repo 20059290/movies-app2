@@ -14,6 +14,16 @@ export const PublicPage = () => {
         </div>
     </>
 }
+export const TopRated = () => {
+    const context = useContext(MoviesContext);
+    return <>
+        <h2>Top Rated Data </h2>
+        <div>
+            {context.toprated.results.map(movie => { return <>{movie.id},{movie.title}<br /></> })}
+        </div>
+    </>
+}
+
  export const Profile = () => {
     return <h2>My Profile </h2>
 }

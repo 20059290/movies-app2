@@ -79,4 +79,26 @@ router.get('/:userName/favourites', asyncHandler( async (req, res) => {
   res.status(200).json(user.favourites);
 }));
 
+//Add a movies to watchlist, can't add duplicate
+router.post('/:userName/watchlist', asyncHandler(async (req, res) => {
+    const newWatchlist = req.body.id;
+    const userName = req.params.userName;
+    const movie = await movieModel.findByMovieDBId(newWatchlist);
+    const user = await User.findByUserName(userName);
+    if (!user.watchlist.includes(movie._id)){
+        await user.watchlist.push(movie._id);
+        await user.save();
+        res.status(201).json(user); 
+    }
+    else{
+        res.status(401).json({ code: 401, msg: 'This movie is already in this users watchlist' });
+    }
+  }));
+
+router.get('/:userName/watchlist', asyncHandler( async (req, res) => {
+  const userName = req.params.userName;
+  const user = await User.findByUserName(userName).populate('watchlist');
+  res.status(200).json(user.watchlist);
+}));
+
 export default router;
