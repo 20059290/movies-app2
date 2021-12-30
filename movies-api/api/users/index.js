@@ -85,9 +85,6 @@ router.delete( '/:userName/favourites', async (req, res) => {
     const userName = req.params.userName;
     const movie = await movieModel.findByMovieDBId(userFavourite);
     const user = await User.findByUserName(userName);
-    await user.favourites.pull({ _id: movie._id});
-    await user.save(); 
-    res.status( 201 ).json( user );
     if (!user.favourites.includes(movie._id)){
         res.status(401).json({ code: 401, msg: 'This movie is not included in the users favourites' });
     }
