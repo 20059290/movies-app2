@@ -79,6 +79,25 @@ router.get('/:userName/favourites', asyncHandler( async (req, res) => {
   res.status(200).json(user.favourites);
 }));
 
+//Delete a movie from the favourites
+router.delete( '/:userName/favourites', async (req, res) => {
+    const userFavourite = req.body.id;
+    const userName = req.params.userName;
+    const movie = await movieModel.findByMovieDBId(userFavourite);
+    const user = await User.findByUserName(userName);
+    await user.favourites.pull({ _id: movie._id});
+    await user.save(); 
+    res.status( 201 ).json( user );
+    if (!user.favourites.includes(movie._id)){
+        res.status(401).json({ code: 401, msg: 'This movie is not included in the users favourites' });
+    }
+    else{
+        await user.favourites.pull(movie._id);
+        await user.save();
+        res.status(201).json(user); 
+    }
+  });
+
 //Add a movies to watchlist, can't add duplicate
 router.post('/:userName/watchlist', asyncHandler(async (req, res) => {
     const newWatchlist = req.body.id;
@@ -100,5 +119,22 @@ router.get('/:userName/watchlist', asyncHandler( async (req, res) => {
   const user = await User.findByUserName(userName).populate('watchlist');
   res.status(200).json(user.watchlist);
 }));
+
+//Delete a movie from the watchlist
+router.delete( '/:userName/watchlist', async (req, res) => {
+    const userWatchlist = req.body.id;
+    const userName = req.params.userName;
+    const movie = await movieModel.findByMovieDBId(userWatchlist);
+    const user = await User.findByUserName(userName);
+    res.status( 201 ).json( user );
+    if (!user.watchlist.includes(movie._id)){
+        res.status(401).json({ code: 401, msg: 'This movie is not included in the users watchlist' });
+    }
+    else{
+        await user.watchlist.pull(movie._id);
+        await user.save();
+        res.status(201).json(user); 
+    }
+  });
 
 export default router;

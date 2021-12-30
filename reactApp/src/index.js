@@ -38,7 +38,7 @@ const App = () => {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <PrivateRoute path="/movies" component={Movies} />
-            <PrivateRoute path="/toprated" component={TopRated} />
+            {/* <PrivateRoute path="/toprated" component={TopRated} /> */}
             <PrivateRoute path="/profile" component={Profile} />
             <Route path="/signup" component={SignUpPage} />
             <Redirect from="*" to="/" />

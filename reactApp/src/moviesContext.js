@@ -7,8 +7,8 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "load":
       return { movies: action.payload.result};
-    case "load-toprated":
-      return { toprated: action.payload.toprated};
+    // case "loadTopRated":
+    //   return { toprated: action.payload.toprated};
     default:
       return state;
   }
@@ -25,18 +25,18 @@ const MoviesContextProvider = props => {
     });
   },[]);
 
-  useEffect(() => {
-    getTopRated().then(result => {
-      console.log(result);
-      dispatch({ type: "load", payload: {result}});
-    });
-  },[]);
+  // useEffect(() => {
+  //   getTopRated().then(result => {
+  //     console.log(result);
+  //     dispatch({ type: "load", payload: {result}});
+  //   });
+  // },[]);
 
   return (
     <MoviesContext.Provider
       value={{
         movies: state.movies,
-        toprated: state.toprated,
+        // toprated: state.toprated,
         setAuthenticated
       }}
     >
