@@ -8,7 +8,7 @@ const reducer = (state, action) => {
     case "load":
       return { movies: action.payload.result};
     // case "loadTopRated":
-    //   return { toprated: action.payload.toprated};
+    //   return { toprated: action.payload.result};
     default:
       return state;
   }
@@ -28,7 +28,7 @@ const MoviesContextProvider = props => {
   // useEffect(() => {
   //   getTopRated().then(result => {
   //     console.log(result);
-  //     dispatch({ type: "load", payload: {result}});
+  //     dispatch({ type: "loadTopRated", payload: {result}});
   //   });
   // },[]);
 

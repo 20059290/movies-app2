@@ -25,9 +25,9 @@ const App = () => {
           <li>
             <Link to="/movies">Movies</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/toprated">Top Rated</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/profile">Profile</Link>
           </li>
