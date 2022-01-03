@@ -46,12 +46,12 @@ TMDB_KEY=[YOUR-TMDB-API-KEY]
 |  |  GET | POST | PUT | DELETE
 | -- | -- | -- | -- | -- 
 | /api/movies |Gets a list of movies | N/A | N/A |
+| /api/toprated |Gets a list of top rated movies | N/A | N/A |
 | /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
 | /api/genres/ | Get a list of movie genres | N/A | N/A | N/A  
 | /api/users/{userid}/watchlist | Get all movies in a users watchlist | Add a new movies to a users watchlist | N/A | Delete a movie from the users watchlist
 | /api/users/{userid}/favourites | Get all movies in a users favourites list | Add a new movies to a users favourites list | N/A | Delete a movie from the users favourites list
 | /api/users?action=register | Get all users | Create a new user account | N/A | N/A  
-| ... | ... | ... | ... | ...
 
 ​
 ​
